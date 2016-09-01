@@ -1,20 +1,34 @@
 # recode
-**Fast batch script for converting videos from variable frame rate to fixed frame rate.
-Works well with ShadowPlay recordings.**
 
-Requires ffmpeg.exe to work, to get it for windows go to Zeranoe FFmpeg (https://ffmpeg.zeranoe.com/builds/) 
-and choose the latest static build for your architecture. 
-If necessary, please rename the executable ffmpeg.exe.
+This simple batch script uses FFmpeg with libx264 to convert mp4-video files
+with a variable bitrate into mp4-video files with a fixed bitrate. This is
+useful if the video file is supposed to be edited with programs like Adobe
+Premiere Pro or Sony Vegas, since these have poor support for video files with a
+variable bitrate. Because of that, this script is well suited for people who
+like to record using Nvidia Shadowplay or similar recording software.
 
-Put the script and ffmpeg.exe in the same directory as your raw MP4 video files.
-The script creates a dir called "EDIT" to put the output video files.
+## Requirements
 
-Current settings for encoding are:   
-* hide_banner - Suppress printing the banner   
-* vsync 1 - Use constant frame rate   
-* crf 19 - Constant rate factor of 19, better video for edit   
-* r 30 - Framerate set to 30 frames per second, change to 60 for 60FPS   
-* c:v libx264 - Use libx264 for video encoding    
-* preset ultrafast - Use libx264 ultra fast encoding preset   
-* c:a copy - Copy the audio from source to destination without change   
+* Microsoft Windows 2000 or later
+* Zeranoe FFmpeg 99882d0 (2016-08-31) or later
 
+Earlier version of FFmpeg will probably work fine but the mentioned version has
+been the first to be tested against. You can download Zeranoe FFmpeg from [this website](https://ffmpeg.zeranoe.com/builds/).
+
+## Installation
+
+Copy  the *ffmpeg.exe* file from the Zeranoe FFmpeg archive and the *recode.bat*
+file to the folder that contains the files you like to convert.
+
+## Configuration
+
+The following parameters are configurable:
+
+* Output directory (*out*): The directory to which re-encoded file will be copied to.
+* Constant rate factor (*crf*): The "quality factor" of the encoder. Lower means
+higher quality but also takes longer.
+* Framerate (*fps*): The framerate of the re-encoded file.
+* FFmpeg encoding preset (*preset*): Please see the FFmpeg documentation for details.
+
+Open the recode.bat file with an editor of your choice and adjust the values of
+the variables named in the brackets above to set their values.
